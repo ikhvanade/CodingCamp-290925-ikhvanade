@@ -1,21 +1,20 @@
 // Todo App JavaScript
 let todos = [];
-let filterStatus = 'all'; // all, completed, pending
+let filterStatus = 'all';
 
-// Load todos dari memori saat halaman dimuat
+
 document.addEventListener('DOMContentLoaded', () => {
     renderTodos();
 });
 
-// Handle form submit
+
 document.getElementById('todo-app').addEventListener('submit', (e) => {
     e.preventDefault();
     addTodo();
 });
 
-// Handle filter button
+
 document.getElementById('filter-btn').addEventListener('click', () => {
-    // Cycle through filter options: all -> pending -> completed -> all
     if (filterStatus === 'all') {
         filterStatus = 'pending';
         document.getElementById('filter-btn').textContent = 'Pending';
@@ -35,7 +34,7 @@ document.getElementById('filter-btn').addEventListener('click', () => {
     renderTodos();
 });
 
-// Handle delete all button
+
 document.getElementById('delete-all-btn').addEventListener('click', () => {
     if (todos.length === 0) return;
     
@@ -45,7 +44,6 @@ document.getElementById('delete-all-btn').addEventListener('click', () => {
     }
 });
 
-// Add new todo
 function addTodo() {
     const input = document.getElementById('todo-input');
     const dateInput = document.getElementById('tanggal');
@@ -63,14 +61,14 @@ function addTodo() {
         createdAt: new Date().toISOString()
     };
     
-    todos.unshift(newTodo); // Add to beginning of array
+    todos.unshift(newTodo);
     input.value = '';
     dateInput.value = '';
     
     renderTodos();
 }
 
-// Toggle todo completion
+
 function toggleTodo(id) {
     const todo = todos.find(t => t.id === id);
     if (todo) {
@@ -79,42 +77,34 @@ function toggleTodo(id) {
     }
 }
 
-// Delete todo
+
 function deleteTodo(id) {
     todos = todos.filter(t => t.id !== id);
     renderTodos();
 }
 
-// Edit todo
+
 function editTodo(id) {
     const todo = todos.find(t => t.id === id);
     if (!todo) return;
     
-    // Isi form dengan data todo yang akan diedit
     document.getElementById('todo-input').value = todo.text;
     document.getElementById('tanggal').value = todo.dueDate || '';
-    
-    // Hapus todo lama
     deleteTodo(id);
-    
-    // Focus ke input
     document.getElementById('todo-input').focus();
 }
 
-// Render todos to DOM
 function renderTodos() {
     const todoList = document.getElementById('todo-list');
     const emptyState = document.getElementById('empty-state');
-    
-    // Filter todos based on current filter status
+
     let filteredTodos = todos;
     if (filterStatus === 'completed') {
         filteredTodos = todos.filter(t => t.completed);
     } else if (filterStatus === 'pending') {
         filteredTodos = todos.filter(t => !t.completed);
     }
-    
-    // Show/hide empty state
+
     if (filteredTodos.length === 0) {
         emptyState.style.display = 'block';
         todoList.innerHTML = '';
@@ -122,20 +112,16 @@ function renderTodos() {
     } else {
         emptyState.style.display = 'none';
     }
-    
-    // Render todo items in table format
+
     todoList.innerHTML = filteredTodos.map(todo => {
-        const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed;
-        
+        const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed; 
         return `
             <div class="todo-item bg-white/90 rounded-lg p-4 shadow-md hover:shadow-lg transition-all">
                 <div class="grid grid-cols-12 gap-4 items-center">
-                    <!-- Task Column -->
                     <div class="col-span-4">
                         <p class="text-gray-800 font-medium ${todo.completed ? 'line-through opacity-60' : ''}">${todo.text}</p>
                     </div>
                     
-                    <!-- Due Date Column -->
                     <div class="col-span-3">
                         ${todo.dueDate ? `
                             <p class="text-sm ${isOverdue ? 'text-red-500 font-semibold' : 'text-gray-600'}">
@@ -145,7 +131,6 @@ function renderTodos() {
                         ` : '<p class="text-gray-400 text-sm">No due date</p>'}
                     </div>
                     
-                    <!-- Status Column -->
                     <div class="col-span-2">
                         <label class="flex items-center gap-2 cursor-pointer">
                             <input 
@@ -160,7 +145,6 @@ function renderTodos() {
                         </label>
                     </div>
                     
-                    <!-- Action Column -->
                     <div class="col-span-3 flex gap-2 justify-center">
                         <button 
                             onclick="editTodo(${todo.id})"
@@ -181,7 +165,6 @@ function renderTodos() {
     }).join('');
 }
 
-// Format date untuk display
 function formatDate(dateString) {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'short', day: 'numeric' };

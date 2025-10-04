@@ -1,5 +1,3 @@
-/* Custom styles untuk Todo App */
-
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +8,6 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Animasi untuk todo items */
 .todo-item {
     animation: slideIn 0.3s ease-out;
 }
@@ -26,7 +23,6 @@ body {
     }
 }
 
-/* Animasi untuk completed tasks */
 .todo-completed {
     animation: completeTask 0.3s ease-out;
 }
@@ -43,7 +39,6 @@ body {
     }
 }
 
-/* Smooth scrollbar */
 #todo-list::-webkit-scrollbar {
     width: 8px;
 }
@@ -62,7 +57,6 @@ body {
     background: rgba(168, 85, 247, 0.7);
 }
 
-/* Hover effects */
 button {
     cursor: pointer;
     transition: all 0.2s ease;
@@ -72,13 +66,11 @@ button:active {
     transform: scale(0.95);
 }
 
-/* Date input styling untuk browser tertentu */
 input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     filter: invert(0.5);
 }
 
-/* Focus states */
 input:focus {
     transform: translateY(-1px);
 }
