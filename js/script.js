@@ -2,17 +2,14 @@
 let todos = [];
 let filterStatus = 'all';
 
-
 document.addEventListener('DOMContentLoaded', () => {
     renderTodos();
 });
-
 
 document.getElementById('todo-app').addEventListener('submit', (e) => {
     e.preventDefault();
     addTodo();
 });
-
 
 document.getElementById('filter-btn').addEventListener('click', () => {
     if (filterStatus === 'all') {
@@ -33,7 +30,6 @@ document.getElementById('filter-btn').addEventListener('click', () => {
     }
     renderTodos();
 });
-
 
 document.getElementById('delete-all-btn').addEventListener('click', () => {
     if (todos.length === 0) return;
@@ -68,7 +64,6 @@ function addTodo() {
     renderTodos();
 }
 
-
 function toggleTodo(id) {
     const todo = todos.find(t => t.id === id);
     if (todo) {
@@ -77,12 +72,10 @@ function toggleTodo(id) {
     }
 }
 
-
 function deleteTodo(id) {
     todos = todos.filter(t => t.id !== id);
     renderTodos();
 }
-
 
 function editTodo(id) {
     const todo = todos.find(t => t.id === id);
