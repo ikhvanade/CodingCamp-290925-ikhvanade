@@ -11,7 +11,6 @@ body {
 .todo-item {
     animation: slideIn 0.3s ease-out;
 }
-
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -26,7 +25,6 @@ body {
 .todo-completed {
     animation: completeTask 0.3s ease-out;
 }
-
 @keyframes completeTask {
     0% {
         transform: scale(1);
@@ -56,21 +54,17 @@ body {
 #todo-list::-webkit-scrollbar-thumb:hover {
     background: rgba(168, 85, 247, 0.7);
 }
-
 button {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 button:active {
     transform: scale(0.95);
 }
-
 input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     filter: invert(0.5);
 }
-
 input:focus {
     transform: translateY(-1px);
 }
